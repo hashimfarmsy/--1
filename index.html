@@ -10,7 +10,6 @@
 </head>
 <body>
 
-  <!-- ===== العناصر المشتركة: الرأس والتنقل ===== -->
   <header id="app-header" class="app-header">
     <button id="btn-back" class="icon-btn" type="button" aria-label="رجوع" hidden></button>
     <a id="brand-link" class="brand-mini" href="#/home">كنزك <span lang="en" dir="ltr">KANZAK</span></a>
@@ -30,7 +29,9 @@
 
   <main id="app-main" class="app-main">
 
-    <!-- ===== حالات عامة ===== -->
+    <noscript><p class="state">يلزم تفعيل JavaScript لتشغيل الموسوعة.</p></noscript>
+
+    <!-- حالات عامة -->
     <div id="state-loading" class="state" role="status" aria-live="polite" hidden>
       <div class="spinner" aria-hidden="true"></div>
       <p>جارٍ التحميل…</p>
@@ -41,9 +42,10 @@
     </div>
     <div id="state-empty" class="state" hidden>
       <p id="state-empty-text">لا توجد نتائج.</p>
+      <a class="btn btn-outline" href="#/home">الصفحة الرئيسية</a>
     </div>
 
-    <!-- ===== 1. الصفحة الرئيسية ===== -->
+    <!-- 1. الرئيسية -->
     <section id="view-home" class="view" data-view="home" hidden>
       <div class="hero">
         <div class="brand">
@@ -64,7 +66,7 @@
         <h2>عن الموسوعة</h2>
         <div id="home-intro-text">
           <p><strong>كنزك</strong> موسوعة علمية عربية متخصصة في مواد التجميل، تجمع المواد الخام في ملفات علمية موحدة ومنظمة. يضم كل ملف اسم المادة وتعريفها وخصائصها ووظائفها ونسب استخدامها وتوافقها وتخزينها وبيانات سلامتها، ويُبنى على مراجع علمية موثقة.</p>
-          <p>تخدم الموسوعة الصيادلة والكيميائيين ومصنّعي مستحضرات التجميل وكل من يعمل في هذا المجال. تستطيع البحث بالاسم العربي أو الإنجليزي أو الكيميائي، أو برقم CAS أو INCI.</p>
+          <p>تخدم الموسوعة الصيادلة والكيميائيين ومصنّعي مستحضرات التجميل وكل من يعمل في هذا المجال. تستطيع البحث بالاسم العربي أو الإنجليزي أو الكيميائي، أو برقم CAS أو باسم INCI.</p>
           <p><strong>العلم أساس المعرفة، والتوثيق أساس الثقة.</strong></p>
         </div>
       </div>
@@ -79,36 +81,36 @@
       <div id="home-sections-grid" class="grid grid-sections"></div>
 
       <div class="home-actions">
-        <a id="btn-whatsapp" class="btn btn-whatsapp" href="#" target="_blank" rel="noopener" data-whatsapp>تواصل عبر واتساب</a>
+        <a class="btn btn-whatsapp" href="#/contact" target="_blank" rel="noopener" data-whatsapp>تواصل عبر واتساب</a>
         <div id="home-subscription-info" class="info-card">
           <h2>الاشتراك</h2>
-          <p id="home-subscription-text"><!-- معلومات الاشتراك: تُحدد لاحقاً --></p>
+          <p id="home-subscription-text"></p>
           <a class="btn btn-outline" href="#/subscription">تفاصيل الاشتراك</a>
         </div>
       </div>
     </section>
 
-    <!-- ===== 2. صفحة الأقسام الرئيسية ===== -->
+    <!-- 2. الأقسام -->
     <section id="view-sections" class="view" data-view="sections" hidden>
       <h1>الأقسام</h1>
       <div id="sections-grid" class="grid grid-sections"></div>
     </section>
 
-    <!-- ===== 3. صفحة الفروع ===== -->
+    <!-- 3. الفروع -->
     <section id="view-branches" class="view" data-view="branches" hidden>
-      <header class="page-head">
+      <div class="page-head">
         <h1 id="branches-title"></h1>
         <p id="branches-count" class="muted"></p>
-      </header>
+      </div>
       <div id="branches-list" class="grid grid-branches"></div>
     </section>
 
-    <!-- ===== 4. صفحة المواد الخام ===== -->
+    <!-- 4. المواد الخام -->
     <section id="view-materials" class="view" data-view="materials" hidden>
-      <header class="page-head">
+      <div class="page-head">
         <h1 id="materials-title"></h1>
         <p id="materials-count" class="muted"></p>
-      </header>
+      </div>
       <div class="toolbar">
         <label for="materials-filter" class="sr-only">البحث داخل الفرع</label>
         <input id="materials-filter" type="search" placeholder="ابحث داخل هذا الفرع">
@@ -122,20 +124,23 @@
       <div id="materials-list" class="grid grid-materials"></div>
     </section>
 
-    <!-- ===== 5. الملف العلمي للمادة ===== -->
+    <!-- 5. الملف العلمي للمادة -->
     <section id="view-material" class="view" data-view="material" hidden>
-      <header class="material-head">
+      <div class="material-head">
         <h1 id="m-name-ar"></h1>
         <p id="m-name-en" lang="en" dir="ltr"></p>
-        <div id="m-sections-links" class="chips" aria-label="الأقسام المرتبطة"></div>
-      </header>
+        <div id="m-sections-links" class="chips" aria-label="القسم والفرع"></div>
+      </div>
 
       <article id="material-file" class="material-file">
         <section class="m-block" data-field="chemical_name"><h2>الاسم الكيميائي</h2><div class="m-body"></div></section>
         <section class="m-block" data-field="aliases"><h2>المرادفات والأسماء التجارية</h2><div class="m-body"></div></section>
-        <section class="m-block" data-field="cas"><h2>رقم CAS</h2><div class="m-body" dir="ltr"></div></section>
-        <section class="m-block" data-field="inci"><h2>رقم INCI</h2><div class="m-body" dir="ltr"></div></section>
+        <section class="m-block" data-field="cas"><h2>رقم CAS</h2><div class="m-body" dir="ltr"></div><p class="muted">يجب تأكيد الرقم وفق تعريف المادة ومواصفات المورد.</p></section>
+        <section class="m-block" data-field="inci"><h2>اسم INCI</h2><div class="m-body" dir="ltr"></div></section>
         <section class="m-block" data-field="definition"><h2>التعريف العلمي</h2><div class="m-body"></div></section>
+        <section class="m-block" data-field="botanical_source"><h2>المصدر النباتي</h2><div class="m-body"></div></section>
+        <section class="m-block" data-field="part_used"><h2>الجزء المستخدم</h2><div class="m-body"></div></section>
+        <section class="m-block" data-field="extraction"><h2>طريقة الاستخلاص</h2><div class="m-body"></div></section>
         <section class="m-block" data-field="composition"><h2>التركيب الكيميائي</h2><div class="m-body"></div></section>
         <section class="m-block" data-field="properties"><h2>الخصائص الفيزيائية والكيميائية</h2><div class="m-body"></div></section>
         <section class="m-block" data-field="functions"><h2>الوظائف والاستخدامات</h2><div class="m-body"></div></section>
@@ -151,7 +156,7 @@
       </article>
     </section>
 
-    <!-- ===== 6. نتائج البحث ===== -->
+    <!-- 6. البحث -->
     <section id="view-search" class="view" data-view="search" hidden>
       <h1>البحث</h1>
       <form id="search-page-form" class="search-box" role="search" autocomplete="off">
@@ -163,7 +168,7 @@
       <ul id="search-results" class="results-list"></ul>
     </section>
 
-    <!-- ===== 7. المستخدم والاشتراكات ===== -->
+    <!-- 7. الحسابات والاشتراكات -->
     <section id="view-register" class="view" data-view="register" hidden>
       <h1>إنشاء حساب</h1>
       <form id="form-register" class="form" novalidate>
@@ -215,7 +220,7 @@
       </div>
       <div id="sub-request" class="info-card" hidden>
         <h2>طلب الاشتراك الشهري</h2>
-        <p id="sub-price-text"><!-- القيمة وطريقة الدفع: تُحدد لاحقاً --></p>
+        <p id="sub-price-text"></p>
         <button type="button" id="btn-request-sub" class="btn">طلب الاشتراك</button>
       </div>
       <div id="sub-request-status" class="info-card" hidden>
@@ -232,10 +237,10 @@
     <section id="view-contact" class="view" data-view="contact" hidden>
       <h1>التواصل مع الإدارة</h1>
       <p id="contact-text"></p>
-      <a class="btn btn-whatsapp" href="#" target="_blank" rel="noopener" data-whatsapp>واتساب</a>
+      <a class="btn btn-whatsapp" href="#/contact" target="_blank" rel="noopener" data-whatsapp>واتساب</a>
     </section>
 
-    <!-- ===== 8. لوحة الإدارة (إخفاؤها ليس حماية؛ الحماية في الخادم) ===== -->
+    <!-- 8. لوحة الإدارة (الحماية الفعلية في الخادم) -->
     <section id="view-admin" class="view" data-view="admin" hidden>
       <h1>لوحة الإدارة</h1>
       <div id="admin-stats" class="grid grid-stats"></div>
@@ -293,7 +298,6 @@
 
   </main>
 
-  <!-- ===== نافذة منبثقة وتنبيهات ===== -->
   <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-box">
       <h2 id="modal-title"></h2>
@@ -306,7 +310,6 @@
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-  <!-- ===== التذييل ===== -->
   <footer id="app-footer" class="app-footer">
     <p>كنزك <span lang="en" dir="ltr">KANZAK</span> — الموسوعة العلمية لمواد التجميل</p>
     <p class="muted">العلم أساس المعرفة، والتوثيق أساس الثقة.</p>
